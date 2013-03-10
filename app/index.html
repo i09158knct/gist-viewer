@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gist Viewer</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" media="all">
+  <style>
+    body {
+      padding-top: 60px;
+      padding-left: 5px;
+    }
+  </style>
+  <script src="js/lib/require.js" data-main="js/main.js"></script>
+</head>
+<body>
+
+  <div class="navbar navbar-inverse navbar-fixed-top" id="navbar">
+    <div class="navbar-inner">
+      <div class="container">
+
+        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="brand" href="#">Gist Viewer</a>
+
+        <div class="nav-collapse collapse">
+          <ul class="nav"></ul>
+          <form class="navbar-search pull-left" id="form-gist-id">
+            <input type="text" class="search-query span4" placeholder="ID" id="gist-id">
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="app-message"></div>
+    <div id="app-hook"></div>
+  </div>
+
+</body>
+</html>

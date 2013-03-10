@@ -1,0 +1,14 @@
+<h1><a target="_blank" href="https://gist.github.com/<%- user.login %>"><%- user.login %><a/> / <a target="_blank" href="<%- html_url %>"><%- id %></a></h1>
+<p>
+  <%= description %>
+</p>
+<% for (var name in files) { %>
+  <% var file = files[name] %>
+  <h2><a target="_blank" href="<%- html_url %>#file-<%- file.filename.replace(/\./g, '-') %>"><%- file.filename %></a></h2>
+  <ul>
+    <li>Type: <%- file.type %></li>
+    <li>Language: <%- file.language || '?' %></li>
+    <li>Raw URL: <a target="_blank" href="<%- file.raw_url %>"><%- file.raw_url %></a></li>
+  </ul>
+  <pre><code><%- file.content %></code></pre>
+<% } %>
