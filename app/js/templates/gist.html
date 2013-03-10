@@ -1,6 +1,6 @@
 <h1><a target="_blank" href="https://gist.github.com/<%- user.login %>"><%- user.login %><a/> / <a target="_blank" href="<%- html_url %>"><%- id %></a></h1>
 <p>
-  <%= description %>
+  <%- description %>
 </p>
 <% for (var name in files) { %>
   <% var file = files[name] %>
@@ -10,5 +10,11 @@
     <li>Language: <%- file.language || '?' %></li>
     <li>Raw URL: <a target="_blank" href="<%- file.raw_url %>"><%- file.raw_url %></a></li>
   </ul>
-  <pre><code><%- file.content %></code></pre>
+  <% if (file.language === 'Markdown') { %>
+    <div>
+      <%= this.mdBuilder.makeHtml(file.content) %>
+    </div>
+  <% } else { %>
+    <pre><code><%- file.content %></code></pre>
+  <% } %>
 <% } %>

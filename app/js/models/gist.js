@@ -9,21 +9,28 @@
 
       __extends(Gist, _super);
 
-      function Gist(gistData) {
+      function Gist() {
+        var attrs;
         Gist.__super__.constructor.apply(this, arguments);
-        if ((this.get('user')) != null) {
-          this.normalize(this);
+        attrs = {
+          id: this.attributes.id,
+          html_url: this.attributes.html_url,
+          description: this.attributes.description,
+          files: this.attributes.files,
+          user: this.attributes.user
+        };
+        if (attrs.user != null) {
+          Gist.normalize(attrs);
         } else {
-          this.set('user', this.defaults.user);
+          attrs.user = this.defaults.user;
         }
+        this.attributes = attrs;
       }
 
-      Gist.prototype.normalize = function(model) {
-        var id, name, user;
-        user = model.get('user');
-        name = user.login;
-        id = model.get('id');
-        return model.set('html_url', "https://gist.github.com/" + name + "/" + id);
+      Gist.normalize = function(attrs) {
+        var id, login, _ref;
+        id = attrs.id, (_ref = attrs.user, login = _ref.login);
+        return attrs.html_url = "https://gist.github.com/" + login + "/" + id;
       };
 
       Gist.prototype.defaults = {

@@ -5,19 +5,26 @@ define [
 ], ($, _, Backbone) ->
 
   class Gist extends Backbone.Model
-    constructor: (gistData) ->
+    constructor: () ->
       super
 
-      if (@get 'user')?
-        @normalize @
-      else
-        @set 'user', @defaults.user
+      attrs =
+        id: @attributes.id
+        html_url: @attributes.html_url
+        description: @attributes.description
+        files: @attributes.files
+        user: @attributes.user
 
-    normalize: (model) ->
-      user = model.get 'user'
-      name = user.login
-      id = model.get 'id'
-      model.set 'html_url', "https://gist.github.com/#{name}/#{id}"
+      if attrs.user?
+        Gist.normalize attrs
+      else
+        attrs.user = @defaults.user
+
+      @attributes = attrs
+
+    @normalize: (attrs) ->
+      {id, user:{login}} = attrs
+      attrs.html_url = "https://gist.github.com/#{login}/#{id}"
 
     defaults:
       id: 'No Content'
@@ -41,4 +48,3 @@ define [
         if remaining == 0 then alert '0!!!!'
         gist = new Gist res.data
         cb? gist, arguments...
-

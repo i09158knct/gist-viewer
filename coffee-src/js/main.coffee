@@ -4,6 +4,7 @@ require.config
     'jquery': 'lib/jquery'
     'underscore': 'lib/lodash'
     'backbone': 'lib/backbone'
+    'showdown': 'lib/showdown'
   shim:
     'jquery':
       exports: 'jQuery'
@@ -12,6 +13,8 @@ require.config
     'backbone':
       exports: 'Backbone'
       deps: ['jquery', 'underscore']
+    'showdown':
+      exports: 'Showdown'
     'lib/bootstrap.min':
       deps: ['jquery']
 require [
@@ -30,5 +33,4 @@ require [
   window.GistView = GistView
   window.NavbarView = NavbarView
   window.router = router
-  window.navbar = navbar
-  
+  window.navbar
