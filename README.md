@@ -1,4 +1,4 @@
 Simple Gist Viewer
 ==================
 
-[DEMO](http://i09158knct.github.com/gist-viewer/app/#/1)
+[Demo](http://i09158knct.github.com/gist-viewer/app/#/1)
