@@ -8,11 +8,16 @@ define [
     constructor: (gistData) ->
       super
 
-      # normalize html_url
-      user = @get 'user'
+      if (@get 'user')?
+        @normalize @
+      else
+        @set 'user', @defaults.user
+
+    normalize: (model) ->
+      user = model.get 'user'
       name = user.login
-      id = @get 'id'
-      @set 'html_url', "https://gist.github.com/#{name}/#{id}"
+      id = model.get 'id'
+      model.set 'html_url', "https://gist.github.com/#{name}/#{id}"
 
     defaults:
       id: 'No Content'
@@ -26,7 +31,7 @@ define [
           raw_url: ''
           content: ''
       user:
-        login: 'No Content'
+        login: 'Unknown User'
 
     @createAsync: (id, cb) ->
       url = "https://api.github.com/gists/#{id}?callback=?"

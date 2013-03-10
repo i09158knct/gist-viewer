@@ -10,13 +10,21 @@
       __extends(Gist, _super);
 
       function Gist(gistData) {
-        var id, name, user;
         Gist.__super__.constructor.apply(this, arguments);
-        user = this.get('user');
-        name = user.login;
-        id = this.get('id');
-        this.set('html_url', "https://gist.github.com/" + name + "/" + id);
+        if ((this.get('user')) != null) {
+          this.normalize(this);
+        } else {
+          this.set('user', this.defaults.user);
+        }
       }
+
+      Gist.prototype.normalize = function(model) {
+        var id, name, user;
+        user = model.get('user');
+        name = user.login;
+        id = model.get('id');
+        return model.set('html_url', "https://gist.github.com/" + name + "/" + id);
+      };
 
       Gist.prototype.defaults = {
         id: 'No Content',
@@ -32,7 +40,7 @@
           }
         },
         user: {
-          login: 'No Content'
+          login: 'Unknown User'
         }
       };
 
