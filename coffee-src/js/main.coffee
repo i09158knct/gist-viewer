@@ -30,4 +30,5 @@ require [
   window.GistView = GistView
   window.NavbarView = NavbarView
   window.router = router
-  window.navbar
+  window.navbar = navbar
+  
